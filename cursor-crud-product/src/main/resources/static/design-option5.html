@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product CRUD - Dashboard</title>
+    <link rel="stylesheet" href="css/option5.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Product Dashboard</h1>
+            <a href="index.html" class="back-link">← Back to Options</a>
+        </header>
+
+        <!-- Dashboard Widgets -->
+        <section class="widgets-section">
+            <div class="widgets-grid">
+                <div class="widget widget-total">
+                    <div class="widget-icon">
+                        <span class="material-icons">inventory_2</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="widget-value" id="totalProducts">0</div>
+                        <div class="widget-title">Total Products</div>
+                    </div>
+                </div>
+
+                <div class="widget widget-expensive">
+                    <div class="widget-icon">
+                        <span class="material-icons">trending_up</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="widget-value" id="mostExpensive">$0.00</div>
+                        <div class="widget-title" id="mostExpensiveName">Most Expensive</div>
+                    </div>
+                </div>
+
+                <div class="widget widget-cheap">
+                    <div class="widget-icon">
+                        <span class="material-icons">trending_down</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="widget-value" id="leastExpensive">$0.00</div>
+                        <div class="widget-title" id="leastExpensiveName">Least Expensive</div>
+                    </div>
+                </div>
+
+                <div class="widget widget-value">
+                    <div class="widget-icon">
+                        <span class="material-icons">attach_money</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="widget-value" id="totalValue">$0.00</div>
+                        <div class="widget-title">Total Value</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Table Section -->
+        <section class="table-section">
+            <div class="table-header">
+                <h2>Products</h2>
+                <button class="btn btn-primary" onclick="openAddProductModal()">
+                    <span class="material-icons">add</span>
+                    Add Product
+                </button>
+            </div>
+
+            <div class="table-container">
+                <div id="loading" class="loading" style="display: none;">Loading...</div>
+                <table id="productsTable" class="data-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('id')" class="sortable">
+                                ID
+                                <span class="sort-indicator" id="sort-id"></span>
+                            </th>
+                            <th onclick="sortTable('name')" class="sortable">
+                                Name
+                                <span class="sort-indicator" id="sort-name"></span>
+                            </th>
+                            <th onclick="sortTable('description')" class="sortable">
+                                Description
+                                <span class="sort-indicator" id="sort-description"></span>
+                            </th>
+                            <th onclick="sortTable('price')" class="sortable">
+                                Price
+                                <span class="sort-indicator" id="sort-price"></span>
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Table rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    <span>Items per page:</span>
+                    <select id="itemsPerPage" onchange="changeItemsPerPage()">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span id="paginationInfo">Showing 0-0 of 0</span>
+                </div>
+                <div class="pagination-controls">
+                    <button id="prevBtn" class="btn btn-secondary" onclick="previousPage()" disabled>Previous</button>
+                    <div id="pageNumbers" class="page-numbers"></div>
+                    <button id="nextBtn" class="btn btn-secondary" onclick="nextPage()" disabled>Next</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="productModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Product</h2>
+                <button class="modal-close" onclick="closeModal()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" id="productName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <textarea id="productDescription" name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Price ($)</label>
+                    <input type="number" id="productPrice" name="price" step="0.01" min="0.01" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
+

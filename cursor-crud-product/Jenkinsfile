@@ -1,0 +1,115 @@
+pipeline {
+    agent any
+    
+    tools {
+        maven 'Maven'
+        jdk 'JDK17'
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out code from repository...'
+                checkout scm
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo 'Running JUnit 5 tests...'
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    // Publish JUnit test results
+                    junit 'target/surefire-reports/**/*.xml'
+                }
+            }
+        }
+        
+        stage('Generate Coverage Report') {
+            steps {
+                echo 'Generating JaCoCo coverage report...'
+                sh 'mvn jacoco:report'
+            }
+            post {
+                always {
+                    // Publish JaCoCo coverage report
+                    publishHTML([
+                        reportDir: 'target/site/jacoco',
+                        reportFiles: 'index.html',
+                        reportName: 'JaCoCo Coverage Report',
+                        reportTitles: 'Product CRUD - Test Coverage Report',
+                        keepAll: true,
+                        alwaysLinkToLastBuild: true
+                    ])
+                }
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker image locally...'
+                script {
+                    // Build Docker image and tag it as cursor-crud-product
+                    sh 'docker build -t cursor-crud-product:latest .'
+                    
+                    // Verify the image was created
+                    sh 'docker images | grep cursor-crud-product'
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application using local Docker image...'
+                script {
+                    // Stop and remove existing container if it exists
+                    sh '''
+                        docker stop cursor-crud-product-container || true
+                        docker rm cursor-crud-product-container || true
+                    '''
+                    
+                    // Run the container from local image
+                    sh '''
+                        docker run -d \
+                            --name cursor-crud-product-container \
+                            -p 9090:9090 \
+                            cursor-crud-product:latest
+                    '''
+                    
+                    // Wait for application to start
+                    sh 'sleep 10'
+                    
+                    // Verify container is running
+                    sh 'docker ps | grep cursor-crud-product-container'
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo 'Pipeline execution completed.'
+            // Archive test results
+            archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'target/site/jacoco/**/*', allowEmptyArchive: true
+        }
+        success {
+            echo 'Pipeline succeeded!'
+            echo 'Application deployed successfully on port 9090'
+            echo 'Coverage Report URL: ${BUILD_URL}HTML_Report/'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
+

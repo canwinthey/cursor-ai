@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product CRUD - Design Options</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="design-selector">
+        <h1>Product CRUD Application - UI/UX Design Options</h1>
+        <div class="options-grid">
+            <div class="option-card" onclick="loadDesign('option1')">
+                <h2>Option 1</h2>
+                <p>Modern Minimalist</p>
+                <span class="preview-color" style="background: #2563EB;"></span>
+            </div>
+            <div class="option-card" onclick="loadDesign('option2')">
+                <h2>Option 2</h2>
+                <p>Vibrant E-Commerce</p>
+                <span class="preview-color" style="background: #FF6B35;"></span>
+            </div>
+            <div class="option-card" onclick="loadDesign('option3')">
+                <h2>Option 3</h2>
+                <p>Elegant Dark Theme</p>
+                <span class="preview-color" style="background: #8B5CF6;"></span>
+            </div>
+            <div class="option-card" onclick="loadDesign('option4')">
+                <h2>Option 4</h2>
+                <p>Material Design</p>
+                <span class="preview-color" style="background: #1976D2;"></span>
+            </div>
+            <div class="option-card" onclick="loadDesign('option5')">
+                <h2>Option 5</h2>
+                <p>Product Dashboard</p>
+                <span class="preview-color" style="background: #6366F1;"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadDesign(option) {
+            window.location.href = `design-${option}.html`;
+        }
+    </script>
+</body>
+</html>
+

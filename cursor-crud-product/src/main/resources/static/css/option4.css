@@ -1,0 +1,317 @@
+/* Option 4: Material Design */
+
+:root {
+    --primary: #1976D2;
+    --secondary: #FF9800;
+    --background: #FAFAFA;
+    --card-bg: #FFFFFF;
+    --text-primary: #212121;
+    --text-secondary: #757575;
+    --divider: #BDBDBD;
+    --success: #4CAF50;
+    --error: #F44336;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.header {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--text-primary);
+}
+
+.back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.back-link:hover {
+    background-color: rgba(25, 118, 210, 0.08);
+}
+
+.back-link .material-icons {
+    font-size: 18px;
+}
+
+.content {
+    display: grid;
+    gap: 24px;
+}
+
+/* Material Elevation */
+.elevation-2 {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.14), 0 1px 2px rgba(0,0,0,0.12);
+}
+
+.elevation-4 {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.14), 0 2px 4px rgba(0,0,0,0.12);
+}
+
+.elevation-8 {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.12);
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.card h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.form-section {
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid var(--divider);
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-bottom-color: var(--primary);
+    border-bottom-width: 2px;
+    padding-bottom: 7px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 88px;
+}
+
+.btn.raised {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn.raised:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1565C0;
+}
+
+.btn-secondary.flat {
+    background: transparent;
+    color: var(--primary);
+}
+
+.btn-secondary.flat:hover {
+    background: rgba(25, 118, 210, 0.08);
+}
+
+.btn-edit {
+    background: var(--primary);
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-delete {
+    background: var(--error);
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.products-section h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.product-card {
+    background: var(--card-bg);
+    border-radius: 4px;
+    padding: 16px;
+    transition: box-shadow 0.2s;
+    border: 1px solid transparent;
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.12);
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--divider);
+}
+
+.product-name {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-left: 12px;
+}
+
+.product-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.product-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* Ripple effect */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
